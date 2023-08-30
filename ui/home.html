@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>AI-Powered HTML Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/style.css?ver=1.0.0" />
+  <style>
+    /* 新增样式，将按钮居中 */
+    .step-navigation_1 {
+      display: flex;
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    /* 新增样式，将按钮居中 */
+    .center-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+        /* 居中显示logo图片和标题文本 */
+    .header-content {
+      display: flex;
+      align-items: center;
+      flex-direction: column; /* 新增，使内容垂直排列 */
+      text-align: center; /* 新增，使内容水平居中 */
+    }
+
+    /* 新增样式 */
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    /* 添加logo图片样式 */
+    .logo img {
+      width: 100px; /* 调整logo图片的宽度 */
+      height: auto; /* 保持图片宽高比 */
+      margin-right: 10px; /* 可以调整logo与标题之间的间距 */
+    }
+
+    /* 调整标题样式 */
+    .logo {
+      margin: 0; /* 移除默认的margin */
+    }
+
+    /* Custom font animation */
+    .glowing-text {
+      animation: text-glow 2s ease-in-out infinite alternate;
+    }
+
+    /* Custom button animation */
+        /* 夜光按钮样式 */
+    .night-glow-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border: 2px solid #7700FF;
+      color: #FFFFFF;
+      background: linear-gradient(to right, #0070FF, #7700FF);
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: 600;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      box-shadow: 0 0 10px rgba(119, 0, 255, 0.8);
+      transition: box-shadow 0.3s ease-in-out, background 0.3s ease-in-out;
+    }
+
+    /* 夜光按钮鼠标悬停效果 */
+    .night-glow-btn:hover {
+      box-shadow: 0 0 20px rgba(119, 0, 255, 0.8);
+    }
+
+    /* 夜光按钮点击效果 */
+    .night-glow-btn:active {
+      background: linear-gradient(to right, #7700FF, #0070FF);
+    }
+    /* 动态点击效果 */
+    .clicked {
+      animation: click-glow 0.3s;
+    }
+
+    @keyframes click-glow {
+      0% {
+        box-shadow: 0 0 20px rgba(119, 0, 255, 0.8);
+      }
+      100% {
+        box-shadow: 0 0 10px rgba(119, 0, 255, 0.8);
+      }
+    }
+
+
+    @keyframes text-glow {
+      from { text-shadow: 0 0 5px #7700FF; }
+      to { text-shadow: 0 0 10px #7700FF; }
+    }
+
+    /* Custom introduction animation */
+    .intro-text {
+      animation: intro-glow 3s ease-in-out infinite;
+    }
+
+    @keyframes intro-glow {
+      0%, 100% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.2); }
+      50% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+      }
+
+      /* Custom window styles */
+    .intro-window {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #E6E6FA;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-content {
+      display: none;
+    }
+
+    .step-content.active {
+      display: block;
+    }
+
+    .step-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    /* "Back"按钮和"Next"按钮夜光效果 */
+    .step-btn {
+      padding: 10px 20px;
+      background: linear-gradient(to right, #0070FF, #7700FF);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease-in-out, background 0.3s ease-in-out;
+      box-shadow: 0 0 10px rgba(119, 0, 255, 0.8);
+    }
+
+    /* "Back"按钮和"Next"按钮鼠标悬停效果 */
+    .step-btn:hover {
+      box-shadow: 0 0 20px rgba(119, 0, 255, 0.8);
+    }
+
+    /* "Back"按钮和"Next"按钮点击效果 */
+    .step-btn:active {
+      background: linear-gradient(to right, #7700FF, #0070FF);
+    }
+
+    .step-btn:disabled {
+      background-color: #CCCCCC;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header Section -->
+<header class="header-section">
+  <div class="header-content">
+    <!-- 添加共同的容器 -->
+    <div class="logo-container">
+      <!-- 添加logo图片 -->
+      <img src="img/home_logo_full.png" alt="Your Logo">
+      <!-- 添加标题 -->
+      <h1 class="logo glowing-text">AI-Powered HTML Generator</h1>
+    </div>
+    <p class="header-subtitle intro-text">Create Stunning HTML Pages with Ease</p>
+  </div>
+</header>
+
+
+  <!-- !Header Section -->
+
+  <!-- Introduction Window -->
+  <div class="intro-window">
+    <div class="step-content active">
+      <h2 class="glowing-text" style="background: linear-gradient(to right, #0070FF, #7700FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Introducing AI-Powered HTML Generator</h2>
+      <p class="intro-text">
+        Welcome to our cutting-edge AI-powered tool that brings your ideas to life! With our powerful technology, you can easily generate HTML content based on your preferred topic and the number of paragraphs you need. Simply input your requirements in the "User Demand" section, and our AI will do the rest for you.
+      </p>
+    </div>
+    <div class="step-content">
+      <h2 class="glowing-text" style="background: linear-gradient(to right, #0070FF, #7700FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">User Demand</h2>
+      <p class="intro-text">
+        Topic: [Input your desired topic here]
+      </p>
+      <p class="intro-text">
+        Number of Paragraphs: [Specify the number of paragraphs needed]
+      </p>
+      <p class="intro-text">
+        Additional Requirements: [Include any specific information or preferences]
+      </p>
+    </div>
+    <div class="step-content">
+      <h2 class="glowing-text" style="background: linear-gradient(to right, #0070FF, #7700FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Choose Your Desired Quality</h2>
+      <p class="intro-text">
+        Our AI-Powered HTML Generator offers various quality options to ensure your content meets your expectations. Select the quality that best matches your needs, and our AI will generate HTML accordingly.
+      </p>
+      <ul>
+        <li class="intro-text">Standard</li>
+        <li class="intro-text">Premium</li>
+        <li class="intro-text">Advanced</li>
+        <li class="intro-text">Custom</li>
+      </ul>
+    </div>
+    <div class="step-content">
+      <h2 class="glowing-text" style="background: linear-gradient(to right, #0070FF, #7700FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Image Style Selection</h2>
+      <p class="intro-text">
+        Customize the visual appearance of your HTML content with our Image Style feature. Choose from a variety of styles to enhance the overall look of your generated pages.
+      </p>
+      <ul>
+        <li class="intro-text">Modern</li>
+        <li class="intro-text">Minimalistic</li>
+        <li class="intro-text">Vibrant</li>
+        <li class="intro-text">Elegant</li>
+      </ul>
+    </div>
+    <div class="step-content">
+      <h2 class="glowing-text" style="background: linear-gradient(to right, #0070FF, #7700FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Ready to Get Started?</h2>
+      <p class="intro-text">
+        You have completed all the steps of our introduction. Now you can start using our AI-Powered HTML Generator to create amazing HTML content effortlessly.
+      </p>
+    </div>
+
+    <div class="step-navigation">
+      <button class="step-btn back-btn" disabled>Back</button>
+      <button class="step-btn next-btn">Next</button>
+    </div>
+  </div>
+  <div class="step-navigation_1">
+    <button class="step-btn get-started-btn">Get Started</button>
+  </div>
+
+
+  <!-- !Introduction Window -->
+
+  <!-- Scripts -->
+  <script type="text/javascript" src="js/jquery.js?ver=1.0.0"></script>
+  <script type="text/javascript" src="js/plugins.js?ver=1.0.0"></script>
+  <!--[if lt IE 10]> <script type="text/javascript" src="js/ie8.js"></script> <![endif]-->
+  <script type="text/javascript" src="js/init.js?ver=1.0.0"></script>
+  <script>
+    const stepContents = document.querySelectorAll('.step-content');
+    const backBtn = document.querySelector('.back-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const getStartedBtn = document.querySelector('.get-started-btn');
+
+    getStartedBtn.addEventListener('click', function() {
+      // 给按钮添加动态点击效果
+      getStartedBtn.classList.add('clicked');
+
+      // 设置一个定时器，过一段时间后移除点击效果
+      setTimeout(function() {
+        getStartedBtn.classList.remove('clicked');
+        window.location.href = 'index.html';
+      }, 300);
+    });
+
+    // "Back"按钮点击效果
+    backBtn.addEventListener('click', function() {
+      backBtn.classList.add('clicked');
+      setTimeout(function() {
+        backBtn.classList.remove('clicked');
+      }, 300);
+    });
+    nextBtn.addEventListener('click', function() {
+      nextBtn.classList.add('clicked');
+      setTimeout(function() {
+        nextBtn.classList.remove('clicked');
+      }, 300);
+    });
+
+
+    let currentStep = 0;
+
+    function showStep(stepIndex) {
+      stepContents.forEach((content, index) => {
+        if (index === stepIndex) {
+          content.classList.add('active');
+        } else {
+          content.classList.remove('active');
+        }
+      });
+
+      backBtn.disabled = stepIndex === 0;
+      nextBtn.disabled = stepIndex === stepContents.length - 1;
+    }
+
+    backBtn.addEventListener('click', () => {
+      if (currentStep > 0) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentStep < stepContents.length - 1) {
+        currentStep++;
+        showStep(currentStep);
+      }
+    });
+
+
+  </script>
+  <!-- !Scripts -->
+</body>
+
+</html>
